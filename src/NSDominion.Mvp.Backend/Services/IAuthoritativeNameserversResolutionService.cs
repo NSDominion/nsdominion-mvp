@@ -1,3 +1,5 @@
+using System.Net;
+
 namespace NSDominion.Mvp.Backend.Services;
 
 /// <summary>
@@ -15,5 +17,8 @@ public interface IAuthoritativeNameserversResolutionService
     /// <param name="domain">The domain.</param>
     /// <param name="cancellationToken">A cancellation token used to cancel the operation.</param>
     /// <returns>The authoritative nameservers of the domain.</returns>
-    public Task<ICollection<string>> ResolveAuthoritativeNameserversAsync(string domain, CancellationToken cancellationToken = default);
+    public Task<IReadOnlyCollection<IPAddress>> ResolveAuthoritativeNameserversAsync(
+        string domain,
+        CancellationToken cancellationToken = default
+    );
 }

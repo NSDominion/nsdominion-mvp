@@ -34,4 +34,16 @@ public sealed class DnsRecord(string name, TimeSpan timeToLive, DnsRecordClass r
     /// The record data contained in this DNS record.
     /// </summary>
     public byte[] RecordData { get; init; } = recordData;
+
+    /// <summary>
+    /// Whether this DNS record is absolute or not.
+    /// </summary>
+    public bool IsAbsolute { get; init; } = name.EndsWith('.');
+
+    /// <summary>
+    /// Resolves the absolute name of this DNS record relative to a base domain.
+    /// </summary>
+    /// <param name="baseDomain">The base domain.</param>
+    /// <returns>The absolute name of this DNS record.</returns>
+    public string ResolveAbsoluteName(string baseDomain) => IsAbsolute ? Name : Name + baseDomain;
 }
