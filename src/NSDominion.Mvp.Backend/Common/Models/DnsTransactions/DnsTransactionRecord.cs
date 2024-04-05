@@ -3,10 +3,9 @@ using NSDominion.Mvp.Backend.Common.Models.DnsRecords;
 namespace NSDominion.Mvp.Backend.Common.Models.DnsTransactions;
 
 /// <summary>
-/// A DNS transaction group. DNS transaction groups form part of DNS transactions and are treated as a unit for which propagation statuses
-/// are accessible and propagation status events are emitted.
+/// A DNS transaction record.
 /// </summary>
-public sealed class DnsTransactionRecord(string dnsTransactionId, string dnsTransactionGroupId, IEnumerable<DnsRecord> records)
+public sealed class DnsTransactionRecord(string dnsTransactionId, string dnsTransactionGroupId, DnsRecord record)
 {
     /// <summary>
     /// The identifier of this DNS transaction this DNS transaction record is part of.
@@ -19,14 +18,9 @@ public sealed class DnsTransactionRecord(string dnsTransactionId, string dnsTran
     public string DnsTransactionGroupId { get; private init; } = dnsTransactionGroupId;
 
     /// <summary>
-    /// The DNS records that form part of this DNS transaction record.
+    /// The DNS record that this DNS transaction record requires.
     /// </summary>
-    public IReadOnlyCollection<DnsRecord> Records => _records.AsReadOnly();
-
-    /// <summary>
-    /// Backing field for <see cref="Records"/>. 
-    /// </summary>
-    private readonly List<DnsRecord> _records = records.ToList();
+    public DnsRecord Record => record;
 
     /// <summary>
     /// Whether this DNS transaction record is currently propagated as of the last propagation check.
