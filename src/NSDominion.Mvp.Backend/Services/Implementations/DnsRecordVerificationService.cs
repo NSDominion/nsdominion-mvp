@@ -64,14 +64,14 @@ public sealed class DnsRecordVerificationService(
     {
         IPAddress ipAddress = ParseIpAddressFromRecordData(dnsRecord.RecordData);
 
-        return aRecords.Any(aRecord => aRecord.Address == ipAddress);
+        return aRecords.Any(aRecord => aRecord.Address.Equals(ipAddress));
     }
 
     private static bool VerifyDnsAaaaRecord(DnsRecord dnsRecord, IEnumerable<AaaaRecord> aaaaRecords)
     {
         IPAddress ipAddress = ParseIpAddressFromRecordData(dnsRecord.RecordData);
 
-        return aaaaRecords.Any(aRecord => aRecord.Address == ipAddress);
+        return aaaaRecords.Any(aRecord => aRecord.Address.Equals(ipAddress));
     }
 
     private static IPAddress ParseIpAddressFromRecordData(byte[] recordData) =>
