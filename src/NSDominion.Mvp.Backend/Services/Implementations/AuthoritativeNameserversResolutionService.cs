@@ -10,6 +10,7 @@ public sealed class AuthoritativeNameserversResolutionService(ILookupClient look
 {
     private readonly ILookupClient _lookupClient = lookupClient;
     
+    /// <inheritdoc />
     public async Task<IReadOnlyCollection<IPAddress>> ResolveAuthoritativeNameserversAsync(
         string domain,
         CancellationToken cancellationToken = default
